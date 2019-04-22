@@ -108,6 +108,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
+    //Configura a célula da tabela
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
         //Captura o índice do array daquela célula
         let task = tasks.fetchedObjects![indexPath.row] as Task
