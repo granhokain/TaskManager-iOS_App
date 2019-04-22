@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, NSFetchedResultsControllerDelegate {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, NSFetchedResultsControllerDelegate, TaskTableViewCellDelegate {
     
     @IBOutlet weak var taskNameTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
@@ -41,6 +41,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         taskNameTextField.delegate = self
         //Calcula o tamanho da linha automaticamente de acordo com o tamanho da tarefa
         tableView.rowHeight = UITableView.automaticDimension
+        //Declarando a classe que será feito as alterações da célula da tabela
+        tableView.register(TaskTableViewCell.classForCoder(), forCellReuseIdentifier: "Cell")
+        
+        tableView.backgroundColor = UIColor.backgroundColor()
+        self.view.backgroundColor = UIColor.frontColor()
     }
     
     @IBAction func addTask() {
@@ -59,7 +64,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         taskNameTextField.resignFirstResponder()
     }
     
-    //UITableViewDataSource
+    //******* UITableViewDataSource *******
     //- Métodos obrigatórios que devem ser implementados ao usar o tableView
     //Esse primeira função precisamos informar quantas linhas terá a tabela
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -68,25 +73,24 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     //Esse segunda função precisamos informar a célula para cada índice informado na tabela
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath as IndexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath as IndexPath) as! TaskTableViewCell
         
         configureCell(cell: cell, atIndexPath: indexPath as NSIndexPath)
         
         return cell
     }
     //Essa terceira função é utilizada para excluir uma tarefa
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        //Se for para remover, é excluido a tarefa do indice informado
-        if editingStyle == .delete {
-            //Maneira de deletar quando é usado o CoreData(Banco de dados)
-            context.delete(tasks.object(at: indexPath) as NSManagedObject)
-            //Salva a atualização
-            saveContext()
-
-        }
-    }
+    //func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    //    //Se for para remover, é excluido a tarefa do indice informado
+    //    if editingStyle == .delete {
+    //        //Maneira de deletar quando é usado o CoreData(Banco de dados)
+    //        context.delete(tasks.object(at: indexPath) as NSManagedObject)
+    //        //Salva a atualização
+    //        saveContext()
+    //    }
+    //}
     
-    //UITextFieldDelegate
+    //******* UITextFieldDelegate *******
     //- Método utilizado para quando é clicado no enter do teclado
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         //Chama o método de adidionar a tarefa ao clicar no enter do teclado
@@ -94,7 +98,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return true
     }
     
-    //NSFetchedResultsControllerDelegate
+    //******* NSFetchedResultsControllerDelegate *******
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?){
         switch type {
         case NSFetchedResultsChangeType.insert:
@@ -102,21 +106,49 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         case NSFetchedResultsChangeType.delete:
             tableView.deleteRows(at:[indexPath!], with: .fade)
         case NSFetchedResultsChangeType.update:
-            configureCell(cell: tableView.cellForRow(at: indexPath!)!, atIndexPath: indexPath! as NSIndexPath)
+            configureCell(cell: tableView.cellForRow(at: indexPath!) as! TaskTableViewCell, atIndexPath: indexPath! as NSIndexPath)
         default:
             return
         }
     }
     
+    //******* TaskTableViewCellDelegate *******
+    func taskItemDeleted(task: Task) {
+        let indexPath = tasks.indexPath(forObject: task)!
+        context.delete(tasks.object(at: indexPath) as NSManagedObject)
+        
+        saveContext()
+    }
+    
+    func taskItemCompleted(task: Task) {
+        task.completed = !task.completed
+        if task.completed {
+            task.completedDate = NSDate() as Date
+        }else {
+            task.completedDate = nil
+        }
+        
+        saveContext()
+    }
+    
     //Configura a célula da tabela
-    func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
+    func configureCell(cell: TaskTableViewCell, atIndexPath indexPath: NSIndexPath) {
         //Captura o índice do array daquela célula
         let task = tasks.fetchedObjects![indexPath.row] as Task
         cell.textLabel?.text = task.name
+        
+        cell.task = task
+        cell.delegate = self
+        
+        if task.completed {
+            cell.backgroundColor = UIColor.completedTaskColor()
+        } else {
+            cell.backgroundColor = UIColor.frontColor()
+        }
     }
     
+    //Salva as alterações
     func saveContext(){
-        //Salva as alterações
         do { try context.save()}
         catch let error { print((error as NSError))}
     }

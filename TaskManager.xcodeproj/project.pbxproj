@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A4A99F8B226E084E007D6B7D /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A99F8A226E084E007D6B7D /* TaskTableViewCell.swift */; };
+		A4A99F8D226E0B52007D6B7D /* UIColor+TaskManagerColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A99F8C226E0B52007D6B7D /* UIColor+TaskManagerColors.swift */; };
+		A4A99F8F226E35F3007D6B7D /* TaskTableViewCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A99F8E226E35F3007D6B7D /* TaskTableViewCellDelegate.swift */; };
 		A4CBAE1A2268B19B00AD5BB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CBAE192268B19B00AD5BB9 /* AppDelegate.swift */; };
 		A4CBAE1C2268B19B00AD5BB9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CBAE1B2268B19B00AD5BB9 /* ViewController.swift */; };
 		A4CBAE1F2268B19B00AD5BB9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4CBAE1D2268B19B00AD5BB9 /* Main.storyboard */; };
@@ -35,6 +38,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A4A99F8A226E084E007D6B7D /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
+		A4A99F8C226E0B52007D6B7D /* UIColor+TaskManagerColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+TaskManagerColors.swift"; sourceTree = "<group>"; };
+		A4A99F8E226E35F3007D6B7D /* TaskTableViewCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCellDelegate.swift; sourceTree = "<group>"; };
 		A4CBAE162268B19B00AD5BB9 /* TaskManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaskManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4CBAE192268B19B00AD5BB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A4CBAE1B2268B19B00AD5BB9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -101,6 +107,9 @@
 			children = (
 				A4CBAE192268B19B00AD5BB9 /* AppDelegate.swift */,
 				A4CBAE1B2268B19B00AD5BB9 /* ViewController.swift */,
+				A4A99F8A226E084E007D6B7D /* TaskTableViewCell.swift */,
+				A4A99F8E226E35F3007D6B7D /* TaskTableViewCellDelegate.swift */,
+				A4A99F8C226E0B52007D6B7D /* UIColor+TaskManagerColors.swift */,
 				A4CBAE1D2268B19B00AD5BB9 /* Main.storyboard */,
 				A4CBAE232268B19D00AD5BB9 /* Assets.xcassets */,
 				A4CBAE252268B19D00AD5BB9 /* LaunchScreen.storyboard */,
@@ -267,9 +276,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4A99F8B226E084E007D6B7D /* TaskTableViewCell.swift in Sources */,
 				A4CBAE222268B19B00AD5BB9 /* TaskManager.xcdatamodeld in Sources */,
 				A4CBAE1C2268B19B00AD5BB9 /* ViewController.swift in Sources */,
+				A4A99F8D226E0B52007D6B7D /* UIColor+TaskManagerColors.swift in Sources */,
 				A4CBAE1A2268B19B00AD5BB9 /* AppDelegate.swift in Sources */,
+				A4A99F8F226E35F3007D6B7D /* TaskTableViewCellDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
