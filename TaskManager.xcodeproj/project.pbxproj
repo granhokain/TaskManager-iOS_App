@@ -105,7 +105,7 @@
 				A4CBAE232268B19D00AD5BB9 /* Assets.xcassets */,
 				A4CBAE252268B19D00AD5BB9 /* LaunchScreen.storyboard */,
 				A4CBAE282268B19D00AD5BB9 /* Info.plist */,
-				A4CBAE202268B19B00AD5BB9 /* TaskManager.xcdatamodeld */,
+				A4CBAE4A2268FE0D00AD5BB9 /* Model */,
 			);
 			path = TaskManager;
 			sourceTree = "<group>";
@@ -126,6 +126,14 @@
 				A4CBAE3E2268B19D00AD5BB9 /* Info.plist */,
 			);
 			path = TaskManagerUITests;
+			sourceTree = "<group>";
+		};
+		A4CBAE4A2268FE0D00AD5BB9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A4CBAE202268B19B00AD5BB9 /* TaskManager.xcdatamodeld */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -437,6 +445,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HSEBQ4EWC4;
 				INFOPLIST_FILE = TaskManager/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -454,6 +463,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HSEBQ4EWC4;
 				INFOPLIST_FILE = TaskManager/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
